@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View, ScrollView, TouchableOpacity, Text } from 'react-native';
+import { View, ScrollView, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
 
 import fetchTopAnime from '../api/fetchTopAnime'
 import AnimeVertical from '../components/Anime/AnimeVertical'
@@ -8,11 +8,15 @@ import AnimeVertical from '../components/Anime/AnimeVertical'
 export default function CatalogScreen({ navigation }) {
 
     let [favorites, setfavorites] = React.useState([]);
+    const [loading, setloading] = React.useState(true);
 
     React.useEffect(() => {
         let isMounted = true;
         fetchTopAnime().then((fav) => {
-            if (isMounted) setfavorites([...fav]);
+            if (isMounted) {
+                setfavorites([...fav]);
+                setloading(false);
+            }
         });
         return () => {
             isMounted = false;
@@ -20,7 +24,7 @@ export default function CatalogScreen({ navigation }) {
     }, [])
 
     return (
-        <View style={{ flex: 1 }}>
+        loading ? <ActivityIndicator style={{ flex: 1, justifyContent: "center", alignContent: "center" }} size="large" color="#000000" /> : <View style={{ flex: 1 }}>
             <Text style={{ fontSize: 24, padding: 5 }}>Популярные аниме</Text>
             <ScrollView horizontal style={{ flex: 1 }}>
                 {favorites.map((favorite, i) => {
