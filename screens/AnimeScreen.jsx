@@ -46,7 +46,10 @@ export default function AnimeScreen({ navigation, route }) {
         loading ? <ActivityIndicator style={{ flex: 1, justifyContent: "center", alignContent: "center" }} size="large" color="#000000" /> : <ScrollView>
             <Image style={{ width: 400, height: 500, resizeMode: "contain", alignSelf: "center" }} source={
                 {
-                    uri: `http://youranime.me${animeData.poster}`
+                    uri: `http://youranime.me${animeData.poster}`,
+                    headers: {
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 YaBrowser/20.7.3.100 Yowser/2.5 Yptp/1.23 Safari/537.36'
+                    }
                 }
             } />
             <Text style={{ padding: 20, textAlign: "center" }}>{animeData.rus} | {animeData.eng}</Text>
@@ -62,7 +65,10 @@ export default function AnimeScreen({ navigation, route }) {
                         return (
                             <Image key={i} style={{ flex: 1, width: 400, height: 300, resizeMode: "contain" }} source={
                                 {
-                                    uri: `http://youranime.me${screenshot}`
+                                    uri: `http://youranime.me${screenshot}`,
+                                    headers: {
+                                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 YaBrowser/20.7.3.100 Yowser/2.5 Yptp/1.23 Safari/537.36'
+                                    }
                                 }
                             } />
                         )
